@@ -105,6 +105,26 @@ public class HoneywellScannerModule extends ReactContextBaseJavaModule implement
             }
         });
     }
+    @ReactMethod
+    public void startReaderReader(final Promise promise) {
+        AidcManager.create(mReactContext, new CreatedCallback() {
+            @Override
+            public void onCreated(AidcManager aidcManager) {
+                manager = aidcManager;
+                reader = manager.createBarcodeReader();
+                if(reader != null){
+                    reader.addBarcodeListener(HoneywellScannerModule.this);
+                    try {
+                        reader.claim();
+                        promise.resolve(true);
+                    } catch (ScannerUnavailableException e) {
+                        promise.resolve(false);
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
     @ReactMethod
     public void stopReader(Promise promise) {
