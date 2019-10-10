@@ -122,6 +122,10 @@ public class HoneywellScannerModule extends ReactContextBaseJavaModule implement
         return Build.BRAND.toLowerCase();
     }
 
+    private String deviceName2(){
+        return Build.BRAND.toLowerCase();
+    }
+
     private boolean isCompatible() {
         // This... is not optimal. Need to find a better way to performantly check whether device has a Honeywell scanner 
         return Build.BRAND.toLowerCase().contains("honeywell");
@@ -133,6 +137,7 @@ public class HoneywellScannerModule extends ReactContextBaseJavaModule implement
         constants.put("BARCODE_READ_SUCCESS", BARCODE_READ_SUCCESS);
         constants.put("BARCODE_READ_FAIL", BARCODE_READ_FAIL);
         constants.put("isCompatible", isCompatible());
+        constants.put("deviceName2",deviceName2());
         return constants;
     }
 
