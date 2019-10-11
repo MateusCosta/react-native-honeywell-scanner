@@ -28,6 +28,7 @@ import com.honeywell.aidc.AidcManager.CreatedCallback;
 import com.honeywell.aidc.BarcodeFailureEvent;
 import com.honeywell.aidc.BarcodeReadEvent;
 import com.honeywell.aidc.BarcodeReader;
+import com.honeywell.aidc.ScannerNotClaimedException;
 import com.honeywell.aidc.ScannerUnavailableException;
 
 @SuppressWarnings("unused")
@@ -137,14 +138,11 @@ public class HoneywellScannerModule extends ReactContextBaseJavaModule implement
         promise.resolve(null);
     }
 
-     @ReactMethod
-    public String deviceName(){
+
+    private String deviceName(){
         return Build.BRAND.toLowerCase();
     }
 
-    private String deviceName2(){
-        return Build.BRAND.toLowerCase();
-    }
 
     private boolean isCompatible() {
         // This... is not optimal. Need to find a better way to performantly check whether device has a Honeywell scanner 
@@ -157,7 +155,7 @@ public class HoneywellScannerModule extends ReactContextBaseJavaModule implement
         constants.put("BARCODE_READ_SUCCESS", BARCODE_READ_SUCCESS);
         constants.put("BARCODE_READ_FAIL", BARCODE_READ_FAIL);
         constants.put("isCompatible", isCompatible());
-        constants.put("deviceName2",deviceName2());
+        constants.put("deviceName",deviceName());
         return constants;
     }
 
